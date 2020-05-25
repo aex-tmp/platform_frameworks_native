@@ -17,6 +17,7 @@
 #include <DisplayHardware/Hal.h>
 #include <android-base/stringprintf.h>
 #include <compositionengine/DisplayColorProfile.h>
+#include <compositionengine/FodExtension.h>
 #include <compositionengine/LayerFECompositionState.h>
 #include <compositionengine/Output.h>
 #include <compositionengine/impl/HwcBufferCache.h>
@@ -403,6 +404,12 @@ void OutputLayer::writeOutputDependentGeometryStateToHWC(HWC2::Layer* hwcLayer,
               "%s (%d)",
               getLayerFE().getDebugName(), sourceCrop.left, sourceCrop.top, sourceCrop.right,
               sourceCrop.bottom, to_string(error).c_str(), static_cast<int32_t>(error));
+    }
+
+    if (strcmp(getLayerFE().getDebugName(), FOD_LAYER_NAME) == 0) {
+        z = getFodZOrder(z, false);
+    } else if (strcmp(getLayerFE().getDebugName(), FOD_TOUCHED_LAYER_NAME) == 0) {
+        z = getFodZOrder(z, true);
     }
 
     if (auto error = hwcLayer->setZOrder(z); error != hal::Error::NONE) {
