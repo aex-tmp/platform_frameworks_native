@@ -27,6 +27,7 @@ cc_defaults {
         "surfaceflinger_defaults",
         "surfaceflinger_qcom_ext_defaults",
         "skia_renderengine_deps",
+        "surfaceflinger_qcom_ext_defaults",
     ],
     cflags: [
         "-DLOG_TAG=\"SurfaceFlinger\"",
