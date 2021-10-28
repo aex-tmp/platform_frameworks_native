@@ -50,10 +50,7 @@ cc_defaults {
 
 cc_library {
     name: "libcompositionengine",
-    defaults: [
-        "libcompositionengine_defaults",
-        "surfaceflinger_fod_lib_defaults",
-    ],
+    defaults: ["libcompositionengine_defaults"],
     srcs: [
         "src/planner/CachedSet.cpp",
         "src/planner/Flattener.cpp",
@@ -77,7 +74,6 @@ cc_library {
     ],
     local_include_dirs: ["include"],
     export_include_dirs: ["include"],
-
 }
 
 cc_library {
@@ -100,14 +96,6 @@ cc_library {
         "libcompositionengine",
     ],
     local_include_dirs: ["include"],
-    export_include_dirs: ["include"],
-}
-
-cc_library_static {
-    name: "surfaceflinger_fod_lib",
-    srcs: [
-        "src/FodExtension.cpp",
-    ],
     export_include_dirs: ["include"],
 }
 
